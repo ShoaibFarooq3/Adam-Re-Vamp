@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #191a1a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.custom-prev-arrow,
+.custom-next-arrow {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.bg-up-arrow {
+  background-image: url("/public/up.svg");
+}
+
+.bg-up-arrow:hover {
+  background-image: url("/public/Up-onHover.svg");
+  cursor: pointer;
+}
+
+.bg-down-arrow {
+  background-image: url("/public/down.svg");
+}
+
+.bg-down-arrow:hover {
+  background-image: url("/public/Down-onHover.svg");
+  cursor: pointer;
+}
+
+.stl-viewer-class {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 85% !important;
+  max-width: 85% !important;
+  z-index: 0;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar thumb for Firefox */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}

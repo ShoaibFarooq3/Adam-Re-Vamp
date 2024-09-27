@@ -1,0 +1,38 @@
+import React from "react";
+
+const LoadingButton = ({ isLoading, buttonText, onClick, className }: any) => {
+  return (
+    <button
+      onClick={onClick}
+      type="submit"
+      className={`${className} w-full p-3 mt-4 rounded-md  text-black font-semibold  transition-colors flex justify-center items-center`}
+    >
+      {isLoading ? (
+        <svg
+          className="animate-spin h-5 w-5 text-black"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          ></circle>
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v8H4z"
+          ></path>
+        </svg>
+      ) : (
+        buttonText
+      )}
+    </button>
+  );
+};
+
+export default LoadingButton;
