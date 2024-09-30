@@ -2,7 +2,6 @@ import { SuggestionsProps } from "../../utils/interfaces";
 import { getColors } from "../../utils/utils";
 
 const Suggestions = ({ Number, item }: SuggestionsProps) => {
-  console.log("key, s ", Number, item);
   return (
     <div>
       <button

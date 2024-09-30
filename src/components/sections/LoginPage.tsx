@@ -32,16 +32,22 @@ const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [showToast, setShowToast] = useState<boolean>(false);
   const [showPasswordField, setShowPasswordField] = useState(false);
   const [toastMessage, setToastMessage] = useState({ message: "", type: "" });
+  const [userPresent, setUserPresent] = useState(false);
 
   useEffect(() => {
     setOpen(isLoggedIn);
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    setUserPresent(true);
+  }, [userExist]);
 
   const handleBlur = () => {
     if (!email) {
       setError("Email is required");
     } else {
       checkUser(email);
+      setUserPresent(true);
       setError("");
     }
   };
@@ -50,10 +56,11 @@ const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
     checkUser(email);
     setIsLoading(true);
     if (email) {
-      if (userExist) {
+      if (userPresent) {
         setError("");
         setShowPasswordField(true);
         setButtonText("SignIn");
+        setIsLoading(false);
         if (email && password) {
           loginUserMutation({ data: { email, password } });
           if (loginUserError) {
@@ -89,11 +96,9 @@ const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
   };
 
   const handleSignUp = () => {
-    console.log("handle Sign Up ");
     navigate("/sign-up");
   };
 
-  console.log("open ", open);
 
   return (
     <React.Fragment>

@@ -6,6 +6,7 @@ import { StlViewer } from "react-stl-viewer";
 import { formatTime } from "../../utils/utils";
 import Avatar from "../atoms/Avatar";
 import Suggestions from "../atoms/Suggestions";
+
 function PrevArrow(props: any) {
   const { onClick, sliderRef, length } = props;
 
@@ -29,13 +30,20 @@ function NextArrow(props: any) {
     ></div>
   );
 }
-const ViewPanel = ({ showSidebar, setShowSidebar }: ViewerPanelProps) => {
+
+const ViewPanel = ({
+  showSidebar,
+  setShowSidebar,
+  showFilter,
+  setShowFilter,
+}: ViewerPanelProps) => {
   const [messages, setMessages] = useState(singleConversation);
   const [indexValue, setIndexValue] = useState(0);
   const [userDataImage, setUserDataImage] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
   useEffect(() => {
+    setShowFilter(!showFilter);
     setMessages(singleConversation);
     setUserDataImage(singleConversation?.user?.imageUrl);
     setSuggestions(messages?.messages[0].suggestions);
@@ -50,6 +58,7 @@ const ViewPanel = ({ showSidebar, setShowSidebar }: ViewerPanelProps) => {
     console.log("handelNext");
     setIndexValue(indexValue + 1);
   };
+
   return (
     <React.Fragment>
       <HeaderIcon
@@ -146,7 +155,7 @@ const ViewPanel = ({ showSidebar, setShowSidebar }: ViewerPanelProps) => {
                           ) : (
                             <React.Fragment>
                               <p
-                                className={` pl-3 w-full mr-3 text-sm text-justify text-white ${
+                                className={`pl-3 w-full mr-3 text-sm text-justify text-white ${
                                   item.adjust && "mt-7"
                                 }`}
                               >
@@ -162,7 +171,7 @@ const ViewPanel = ({ showSidebar, setShowSidebar }: ViewerPanelProps) => {
                     </div>
                   );
                 })}
-              </div>{" "}
+              </div>
               {userDataImage && (
                 <div className="ml-3">
                   <Avatar image={userDataImage} />

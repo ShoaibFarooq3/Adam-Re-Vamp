@@ -27,7 +27,6 @@ const useOpenScadQuery = (messages: string | any[]) => {
         },
         body: JSON.stringify({ MESSAGES: messages }),
       });
-      console.log("response in api call ", response);
       if (!response.ok) {
         throw new Error("Server error!");
       }

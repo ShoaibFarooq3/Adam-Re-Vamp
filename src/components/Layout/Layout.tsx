@@ -12,6 +12,8 @@ const Layout: React.FC<LayoutProps> = ({
   setIsLoggedIn,
   setShowStartPage,
   isLoggedIn,
+  showFilter,
+  setShowFilter,
 }) => {
   return (
     <div className="flex h-[100vh]">
@@ -21,6 +23,8 @@ const Layout: React.FC<LayoutProps> = ({
         }`}
       >
         <PromptPanel
+          setShowFilter={setShowFilter}
+          showFilter={showFilter}
           showStartPage={showStartPage}
           setShowStartPage={setShowStartPage}
           showSidebar={showSidebar}
@@ -30,9 +34,9 @@ const Layout: React.FC<LayoutProps> = ({
         />
       </div>
       <div className="w-[60vw] bg-[#191a1a] flex-grow">{children}</div>
-      {!showStartPage && (
+      {showFilter && (
         <div className="w-[20vw] bg-[#212121] hidden lg:block">
-          <FilterPanel />
+          <FilterPanel setShowFilter={setShowFilter} showFilter={showFilter} />
         </div>
       )}
     </div>

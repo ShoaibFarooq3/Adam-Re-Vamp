@@ -13,6 +13,8 @@ const PromptPanel = ({
   setIsLoggedIn,
   showStartPage,
   setShowStartPage,
+  showFilter,
+  setShowFilter,
 }: PromptPanelProps) => {
   const componentRef = useRef<HTMLDivElement>(null);
   const [showSideMenu, setshowSideMenu] = useState(showSidebar);
@@ -34,6 +36,7 @@ const PromptPanel = ({
   const handleNewCreation = async () => {
     console.log("handle New Creation");
     setShowStartPage(true);
+    setShowFilter(false);
   };
 
   const handleOutsideClick = (event: MouseEvent | TouchEvent) => {

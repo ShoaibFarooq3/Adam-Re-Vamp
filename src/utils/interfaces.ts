@@ -17,6 +17,8 @@ export interface DropDownPageProps {
 }
 
 export interface LayoutProps {
+  showFilter: boolean;
+  setShowFilter: (value: boolean) => void;
   children: ReactNode;
   showSidebar: boolean;
   setShowSidebar: (value: boolean) => void;
@@ -63,6 +65,8 @@ export interface StartPageProps {
 }
 
 export interface PromptPanelProps {
+  showFilter: boolean;
+  setShowFilter: (value: boolean) => void;
   setShowSidebar: (value: boolean) => void;
   showSidebar: boolean;
   setIsLoggedIn: (value: boolean) => void;
@@ -135,11 +139,18 @@ export interface SignupData {
 }
 
 export interface ViewerPanelProps {
+  showFilter: boolean;
+  setShowFilter: (value: boolean) => void;
   showSidebar: boolean;
   setShowSidebar: (value: boolean) => void;
 }
 
-export interface Suggestions {
+export interface SuggestionsProps {
   Number: number;
   item: string;
+}
+
+export interface FilterPanelProps {
+  showFilter: boolean;
+  setShowFilter: (value: boolean) => void;
 }

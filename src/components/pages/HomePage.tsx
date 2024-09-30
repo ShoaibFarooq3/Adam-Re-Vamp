@@ -8,6 +8,7 @@ import PromptBar from "../atoms/PromptBar";
 import StartPage from "../sections/StartPage";
 import { clearUser } from "../../redux/slices/authSlice";
 import ViewPanel from "../sections/ViewPanel";
+import ResponsiveDrawer from "../atoms/ResponsiveDrawer";
 // import { ModelContext } from "../contexts/contexts";
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -18,9 +19,10 @@ const HomePage = () => {
   // const lastPrompt = model?.state?.params?.lastPrompt || "";
 
   const { isAuthenticated } = useSelector((state: RootState) => ({
-    isAuthenticated: state.auth.isAuthenticated,
+    isAuthenticated: state?.auth?.isAuthenticated,
   }));
 
+  const [showFilter, setShowFilter] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [showStartPage, setShowStartPage] = useState(true);
@@ -38,6 +40,8 @@ const HomePage = () => {
   return (
     <div className="overflow-hidden">
       <Layout
+        setShowFilter={setShowFilter}
+        showFilter={showFilter}
         showSidebar={showSidebar}
         setShowSidebar={setShowSidebar}
         setShowStartPage={setShowStartPage}
@@ -56,10 +60,18 @@ const HomePage = () => {
               setShowSidebar={setShowSidebar}
             />
           ) : (
-            <ViewPanel
-              showSidebar={showSidebar}
-              setShowSidebar={setShowSidebar}
-            />
+            <React.Fragment>
+              <ViewPanel
+                setShowFilter={setShowFilter}
+                showFilter={showFilter}
+                showSidebar={showSidebar}
+                setShowSidebar={setShowSidebar}
+              />
+              <ResponsiveDrawer
+                setShowFilter={setShowFilter}
+                showFilter={showFilter}
+              />
+            </React.Fragment>
           )}
 
           <PromptBar />
