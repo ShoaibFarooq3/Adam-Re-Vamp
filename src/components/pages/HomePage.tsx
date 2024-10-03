@@ -21,7 +21,6 @@ const HomePage = () => {
   const { isAuthenticated } = useSelector((state: RootState) => ({
     isAuthenticated: state?.auth?.isAuthenticated,
   }));
-
   const [showFilter, setShowFilter] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
@@ -38,53 +37,26 @@ const HomePage = () => {
   }, [isAuthenticated]);
 
   return (
-    <div className="overflow-hidden">
-      <Layout
-        setShowFilter={setShowFilter}
-        showFilter={showFilter}
-        showSidebar={showSidebar}
-        setShowSidebar={setShowSidebar}
-        setShowStartPage={setShowStartPage}
-        showStartPage={true}
-        isLoggedIn={isLoggedIn}
-        setIsLoggedIn={(value: boolean) => {
-          if (!value) {
-            dispatch(clearUser());
-          }
-        }}
-      >
-        <div className="h-full flex flex-col">
-          {showStartPage ? (
-            <StartPage
+    <div className="">
+      <div className="h-full flex flex-col">
+        {showStartPage ? (
+          <StartPage
+            showSidebar={showSidebar}
+            setShowSidebar={setShowSidebar}
+          />
+        ) : (
+          <React.Fragment>
+            <ViewPanel
+              setShowFilter={setShowFilter}
+              showFilter={showFilter}
               showSidebar={showSidebar}
               setShowSidebar={setShowSidebar}
             />
-          ) : (
-            <React.Fragment>
-              <ViewPanel
-                setShowFilter={setShowFilter}
-                showFilter={showFilter}
-                showSidebar={showSidebar}
-                setShowSidebar={setShowSidebar}
-              />
-              <ResponsiveDrawer
-                setShowFilter={setShowFilter}
-                showFilter={showFilter}
-              />
-            </React.Fragment>
-          )}
+          </React.Fragment>
+        )}
 
-          <PromptBar />
-        </div>
-      </Layout>
-      <Toast
-        showToast={showToast}
-        toastMessage={toastMessage}
-        onClose={() => {
-          setShowToast(false);
-          setToastMessage({ message: "", type: "" });
-        }}
-      />
+        <PromptBar />
+      </div>
     </div>
   );
 };

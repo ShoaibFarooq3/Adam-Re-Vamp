@@ -1,30 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Conversation, ConversationHistoryProps } from "../../utils/interfaces";
 import { categorizeConversations, cleanCode } from "../../utils/utils";
 import { useUserConversations } from "../../api/conversation/userConversation";
 import fetchConversationById from "../../api/conversation/fetchConversationById";
+import { ModelContext } from "../contexts";
+import { useNavigate } from "react-router-dom";
 
 const ConversationHistory = ({
   showStartPage,
   setShowStartPage,
 }: ConversationHistoryProps) => {
-  const { data, error, isLoading } = useUserConversations();
-  const {
-    mutate,
-    data: conversationData,
-    isLoading: isLoadingConversatiion,
-  } = fetchConversationById();
-  // let cleanResponse = await cleanCode(conversationData.)
+  const navigate = useNavigate();
+  const model = useContext(ModelContext);
+  if (!model) throw new Error("No model");
+  const { data, error, isLoading, refetch } = useUserConversations();
+
+  // let cleanResponse = await cleanCode(conversationData)
   const { today, yesterday, previous30Days, older } = categorizeConversations(
     data || []
   );
-  if (isLoadingConversatiion) return <div>Loading...</div>;
-  if (error) return <div></div>;
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error in Loading...</div>;
 
   const handleGetConversation = (conversationId: string) => {
-    mutate(conversationId);
-    setShowStartPage(!showStartPage);
+    navigate(`/${conversationId}`);
   };
   return (
     <div className="max-h-[80vh] p-4">

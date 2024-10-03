@@ -5,6 +5,7 @@ import NewProject from "../atoms/NewProject";
 import LoginUserSection from "./LoginUserSection";
 import { PromptPanelProps, LoginUserData } from "../../utils/interfaces";
 import ConversationHistory from "../atoms/ConversationHistory";
+import { useNavigate } from "react-router-dom";
 
 const PromptPanel = ({
   showSidebar,
@@ -13,9 +14,10 @@ const PromptPanel = ({
   setIsLoggedIn,
   showStartPage,
   setShowStartPage,
-  showFilter,
-  setShowFilter,
+
 }: PromptPanelProps) => {
+  const navigate = useNavigate();
+
   const componentRef = useRef<HTMLDivElement>(null);
   const [showSideMenu, setshowSideMenu] = useState(showSidebar);
 
@@ -35,8 +37,9 @@ const PromptPanel = ({
 
   const handleNewCreation = async () => {
     console.log("handle New Creation");
+    navigate("/");
+
     setShowStartPage(true);
-    setShowFilter(false);
   };
 
   const handleOutsideClick = (event: MouseEvent | TouchEvent) => {

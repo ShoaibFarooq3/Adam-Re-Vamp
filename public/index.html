@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+
+    <link rel="prefetch" href="openscad.wasm" />
+    <link rel="prefetch" href="openscad-worker.js" />
+    <link rel="prefetch" href="libraries/fonts.zip" />
+
+    <link rel="prefetch" href="libraries/MCAD.zip" />
+    <link rel="prefetch" href="libraries/BOSL2.zip" />
+    <link rel="prefetch" href="libraries/BOSL.zip" />
+    <link rel="prefetch" href="libraries/NopSCADlib.zip" />
+    <link rel="prefetch" href="libraries/FunctionalOpenSCAD.zip" />
+    <link rel="prefetch" href="libraries/funcutils.zip" />
+    <link rel="prefetch" href="libraries/smooth-prim.zip" />
+    <link rel="prefetch" href="libraries/closepoints.zip" />
+    <link rel="prefetch" href="libraries/plot-function.zip" />
+    <link rel="prefetch" href="libraries/YAPP_Box.zip" />
+    <link rel="prefetch" href="libraries/Stemfie_OpenSCAD.zip" />
+    <link rel="prefetch" href="libraries/UB.scad.zip" />
+    <link rel="prefetch" href="libraries/openscad-tray.zip" />
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/BrowserFS/2.0.0/browserfs.min.js" defer></script> -->
+    <script src="./browserfs.min.js" defer></script>
+
+    <script src="./index.js" defer></script>
+
+    <link rel="icon" href="../public/favicon.ico" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <meta name="theme-color" content="#000000" />
+
+    <meta
+      name="description"
+      content="Adam: edit .scad models with natural language and render them to STL from the browser "
+    />
+    <link rel="apple-touch-icon" href="logo192.png" />
+
+    <!-- https://developers.google.com/web/fundamentals/web-app-manifest/ -->
+    <link rel="manifest" href="manifest.json" />
+
+    <title>Adam</title>
+    <style>
+      #root,
+      body,
+      html {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        margin: 0;
+
+        height: 100vh;
+        height: var(--app-height);
+      }
+
+      .p-tabmenu-nav {
+        justify-content: center;
+      }
+
+      .absolute-fill {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+      }
+
+      .monaco-editor {
+        background-color: rgba(255, 255, 255, 0.5) !important;
+      }
+      .overflow-guard,
+      .monaco-scrollable-element,
+      .monaco-editor-background {
+        background-color: transparent !important;
+      }
+
+      .opacity-animated {
+        transition: opacity 0.5s ease-in-out;
+      }
+      .opacity-0 {
+        opacity: 0;
+      }
+
+      .p-tabmenu-nav {
+        padding-right: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript
+      >You need to enable JavaScript to run Adam locally.</noscript
+    >
+    <div id="root"></div>
+  </body>
+</html>

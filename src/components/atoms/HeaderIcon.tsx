@@ -29,10 +29,7 @@ const HeaderIcon = ({
           alt="adam logo"
         />
       </div>
-      <div
-        className="reltive flex justify-end mr-4 z-[100]"
-        onClick={handleNewChat}
-      >
+      <div className="reltive flex justify-end mr-4" onClick={handleNewChat}>
         <img
           src="/create-icon.svg"
           alt="create icon"

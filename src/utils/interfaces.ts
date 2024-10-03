@@ -54,19 +54,17 @@ export interface Data {
 }
 
 export interface HeaderIconProps {
-  className: string;
-  showSidebar: boolean;
-  setShowSidebar: (value: boolean) => void;
+  className?: string;
+  showSidebar?: boolean;
+  setShowSidebar?: (value: boolean) => void;
 }
 
 export interface StartPageProps {
-  showSidebar: boolean;
-  setShowSidebar: (value: boolean) => void;
+  showSidebar?: boolean;
+  setShowSidebar?: (value: boolean) => void;
 }
 
 export interface PromptPanelProps {
-  showFilter: boolean;
-  setShowFilter: (value: boolean) => void;
   setShowSidebar: (value: boolean) => void;
   showSidebar: boolean;
   setIsLoggedIn: (value: boolean) => void;
@@ -139,10 +137,10 @@ export interface SignupData {
 }
 
 export interface ViewerPanelProps {
-  showFilter: boolean;
-  setShowFilter: (value: boolean) => void;
-  showSidebar: boolean;
-  setShowSidebar: (value: boolean) => void;
+  showFilter?: boolean;
+  setShowFilter?: (value: boolean) => void;
+  showSidebar?: boolean;
+  setShowSidebar?: (value: boolean) => void;
 }
 
 export interface SuggestionsProps {
@@ -153,4 +151,19 @@ export interface SuggestionsProps {
 export interface FilterPanelProps {
   showFilter: boolean;
   setShowFilter: (value: boolean) => void;
+}
+
+export interface LoginPageProps {
+  isLoggedIn: boolean;
+  setIsLoggedIn: (value: boolean) => void;
+}
+
+export type LoaderProps = {
+  isLoading: boolean;
+};
+
+export interface Parameter {
+  name: string;
+  value: number;
+  defaultValue: number;
 }

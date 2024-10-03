@@ -6,8 +6,9 @@ import Toast from "../atoms/Toast";
 import LoadingButton from "../atoms/LoadingButton";
 import { useLoginUserMutation } from "../../api/auth/auth";
 import { useCheckUserMutation } from "../../api/userApi/userApi";
+import { LoginPageProps } from "../../utils/interfaces";
 
-const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
+const LoginPage = ({ isLoggedIn, setIsLoggedIn }: LoginPageProps) => {
   const navigate = useNavigate();
 
   const {
@@ -96,9 +97,8 @@ const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
   };
 
   const handleSignUp = () => {
-    navigate("/sign-up");
+    ("/sign-up");
   };
-
 
   return (
     <React.Fragment>

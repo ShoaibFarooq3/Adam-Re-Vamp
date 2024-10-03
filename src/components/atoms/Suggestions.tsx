@@ -1,3 +1,4 @@
+import React from "react";
 import { SuggestionsProps } from "../../utils/interfaces";
 import { getColors } from "../../utils/utils";
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-const NewProject = ({ handleNewCreation }) => {
+const NewProject = ({ handleNewCreation }: any) => {
   return (
     <button
       onClick={handleNewCreation}

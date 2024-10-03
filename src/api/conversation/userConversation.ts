@@ -10,5 +10,7 @@ export const fetchUserConversations = async () => {
 };
 
 export const useUserConversations = () => {
-  return useQuery("getUserConversation", fetchUserConversations);
+  return useQuery("getUserConversation", fetchUserConversations, {
+    enabled: false,
+  });
 };

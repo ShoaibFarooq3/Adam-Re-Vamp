@@ -45,9 +45,9 @@ const ResponsiveDrawer = ({ showFilter, setShowFilter }: FilterPanelProps) => {
       {isDrawerOpen && (
         <React.Fragment>
           {isMobile ? (
-            <div className="absolute right-0  w-full">
+            <div className="absolute right-0 w-full">
               <span
-                className=" absolute right-2 top-2 h-10 text-3xl text-white "
+                className="absolute right-2 top-2 h-10 text-3xl text-white"
                 onClick={toggleDrawer}
               >
                 ×
@@ -58,15 +58,16 @@ const ResponsiveDrawer = ({ showFilter, setShowFilter }: FilterPanelProps) => {
               />
             </div>
           ) : (
-            <FilterPanel
-              setShowFilter={setShowFilter}
-              showFilter={showFilter}
-            />
+            <></>
+            // <FilterPanel
+            //   setShowFilter={setShowFilter}
+            //   showFilter={showFilter}
+            // />
           )}
         </React.Fragment>
       )}
       {isMobile && !isDrawerOpen ? (
-        <div className="absolute w-0 right-0 h-full ">
+        <div className="absolute w-0 right-0 h-full">
           <img
             src="/setting-icon-normal.svg"
             alt="create icon"

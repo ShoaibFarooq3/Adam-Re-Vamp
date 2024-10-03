@@ -1,4 +1,4 @@
-import { Conversation } from "./interfaces";
+import { Conversation, Parameter } from "./interfaces";
 
 export const getGreeting = () => {
   const currentHour = new Date().getHours();
@@ -86,4 +86,20 @@ export const getColors = (index: Number) => {
   } else {
     return "#620372";
   }
+};
+
+export const extractParameters = (code: string): Parameter[] => {
+  const paramRegex = /(\w+)\s*=\s*([\d.-]+)/g;
+  const parameters: Parameter[] = [];
+  let match;
+  while ((match = paramRegex.exec(code)) !== null) {
+    const name = match[1];
+    const value = parseFloat(match[2]);
+    const defaultValue = parseFloat(match[2]);
+    if (!isNaN(value)) {
+      parameters.push({ name, value, defaultValue });
+    }
+  }
+
+  return parameters;
 };

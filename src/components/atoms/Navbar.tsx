@@ -23,7 +23,7 @@ const navigation = [
   { name: "Team", href: "#", current: false },
 ];
 
-function classNames(...classes) {
+function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 const Navbar = () => {
