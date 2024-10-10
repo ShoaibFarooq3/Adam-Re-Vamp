@@ -215,7 +215,7 @@ export const conversationList = [
 export const data = [
   {
     title: "Cylinder",
-    imageUrl: "/Rectangle-3035.png",
+    imageUrl: "/carousel-images/Toothbrush-Holder.png",
     spanData: [
       {
         name: "supports",
@@ -229,7 +229,7 @@ export const data = [
   },
   {
     title: "Buttons",
-    imageUrl: "/button-data.png",
+    imageUrl: "/carousel-images/Raspi-Case.png",
     spanData: [
       {
         name: "attachments",

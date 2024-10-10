@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { ModelContext } from "../contexts";
 import MenuToggleButton from "./MenuToggleButton";
 import { HeaderIconProps } from "../../utils/interfaces";
 
@@ -7,9 +9,24 @@ const HeaderIcon = ({
   className,
   showSidebar,
   setShowSidebar,
+  setShowFilter,
+  setShowStartPage,
 }: HeaderIconProps) => {
+  const model = useContext(ModelContext);
+  if (!model) throw new Error("No model");
+  const state = model.state;
+  const navigate = useNavigate();
+
   const handleNewChat = () => {
-    console.log("handleNewChat");
+    model.source = "";
+    model.lastPrompt = "";
+    if (!!state?.output?.stlFileURL) {
+      state.output.stlFileURL = "";
+      state.output.isPreview = false;
+    }
+    setShowFilter(false);
+    setShowStartPage(true);
+    navigate("/");
   };
 
   return (

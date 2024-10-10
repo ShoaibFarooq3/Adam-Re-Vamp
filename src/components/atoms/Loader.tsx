@@ -1,7 +1,7 @@
 import React from "react";
-import { LoaderProps } from "../../utils/interfaces";
+import { LoadingProps } from "../../utils/interfaces";
 
-const Loader = ({ isLoading }: LoaderProps) => {
+const Loader = ({ isLoading }: LoadingProps) => {
   return (
     <div
       className={`absolute left-1/2 -translate-x-1/2 rounded-full py-2 px-12 ${

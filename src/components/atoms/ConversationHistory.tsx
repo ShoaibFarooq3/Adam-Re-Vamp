@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { Conversation, ConversationHistoryProps } from "../../utils/interfaces";
-import { categorizeConversations, cleanCode } from "../../utils/utils";
+import { categorizeConversations } from "../../utils/utils";
 import { useUserConversations } from "../../api/conversation/userConversation";
-import fetchConversationById from "../../api/conversation/fetchConversationById";
 import { ModelContext } from "../contexts";
 import { useNavigate } from "react-router-dom";
 
@@ -29,6 +28,7 @@ const ConversationHistory = ({
   if (error) return <div>Error in Loading...</div>;
 
   const handleGetConversation = (conversationId: string) => {
+    localStorage.setItem("conversationId", conversationId);
     navigate(`/${conversationId}`);
   };
   return (
@@ -36,7 +36,7 @@ const ConversationHistory = ({
       {today?.length > 0 && (
         <React.Fragment>
           <h2 className="text-[#c1c1c1] text-[12px] font-bold mb-3">Today</h2>
-          {today.map((item: Conversation, index: number) => (
+          {today?.map((item: Conversation, index: number) => (
             <div className="w-full hover:opacity-70 duration-150" key={index}>
               <div
                 className="p-1 text-white rounded-md mb-4 cursor-pointer"
@@ -48,7 +48,7 @@ const ConversationHistory = ({
           ))}
         </React.Fragment>
       )}
-      {yesterday.length > 0 && (
+      {yesterday?.length > 0 && (
         <React.Fragment>
           <h2 className="text-[#c1c1c1] text-[12px] font-bold mb-3">
             Yesterday
@@ -65,7 +65,7 @@ const ConversationHistory = ({
           ))}
         </React.Fragment>
       )}
-      {previous30Days.length > 0 && (
+      {previous30Days?.length > 0 && (
         <React.Fragment>
           <h2 className="text-[#c1c1c1] text-[12px] font-bold mb-3">
             Previous 30 Days
@@ -83,7 +83,7 @@ const ConversationHistory = ({
         </React.Fragment>
       )}
 
-      {older.length > 0 && (
+      {older?.length > 0 && (
         <React.Fragment>
           <h2 className="text-[#c1c1c1] text-[12px] font-bold mb-3">Older</h2>
           {older.map((item: Conversation, index: number) => (

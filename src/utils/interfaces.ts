@@ -1,5 +1,11 @@
 import { ReactNode } from "react";
+import { State, StatePersister } from "../state/app-state";
 
+export interface AppProps {
+  initialState: State;
+  statePersister: StatePersister;
+  fs: FS;
+}
 export interface User {
   _id: string;
   name: string;
@@ -55,16 +61,29 @@ export interface Data {
 
 export interface HeaderIconProps {
   className?: string;
-  showSidebar?: boolean;
-  setShowSidebar?: (value: boolean) => void;
+  showSidebar: boolean;
+  setShowSidebar: (value: boolean) => void;
+  showFilter: boolean;
+  setShowFilter: (value: boolean) => void;
+  setShowStartPage: (value: boolean) => void;
+  showStartPage: boolean;
 }
 
 export interface StartPageProps {
-  showSidebar?: boolean;
-  setShowSidebar?: (value: boolean) => void;
+  showSidebar: boolean;
+  setShowSidebar: (value: boolean) => void;
+  isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
+  setShowFilter: (value: boolean) => void;
+  showFilter: boolean;
+  className?: string;
+  setShowStartPage: (value: boolean) => void;
+  showStartPage: boolean;
 }
 
 export interface PromptPanelProps {
+  showFilter: boolean;
+  setShowFilter: (value: boolean) => void;
   setShowSidebar: (value: boolean) => void;
   showSidebar: boolean;
   setIsLoggedIn: (value: boolean) => void;
@@ -137,15 +156,19 @@ export interface SignupData {
 }
 
 export interface ViewerPanelProps {
-  showFilter?: boolean;
-  setShowFilter?: (value: boolean) => void;
-  showSidebar?: boolean;
-  setShowSidebar?: (value: boolean) => void;
+  showFilter: boolean;
+  setShowFilter: (value: boolean) => void;
+  showSidebar: boolean;
+  setShowSidebar: (value: boolean) => void;
+  isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
+  setShowStartPage: (value: boolean) => void;
+  showStartPage: boolean;
 }
-
 export interface SuggestionsProps {
   Number: number;
   item: string;
+  handleSuggestions: (value: string) => void; 
 }
 
 export interface FilterPanelProps {
@@ -166,4 +189,20 @@ export interface Parameter {
   name: string;
   value: number;
   defaultValue: number;
+}
+
+export type LoadingProps = {
+  isLoading: boolean;
+};
+
+export interface PromptbarProps {
+  isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
+}
+
+export interface MessageData {
+  userMessage: string;
+  aiMessage: string;
+  suggestions: Array<string>;
+  adjust: boolean;
 }

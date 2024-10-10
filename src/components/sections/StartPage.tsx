@@ -64,6 +64,7 @@ var settings = {
     },
   ],
 };
+
 const StartPage = ({ showSidebar, setShowSidebar }: StartPageProps) => {
   return (
     <React.Fragment>

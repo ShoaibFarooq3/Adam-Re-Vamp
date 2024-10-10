@@ -58,7 +58,7 @@ const ResponsiveDrawer = ({ showFilter, setShowFilter }: FilterPanelProps) => {
               />
             </div>
           ) : (
-            <></>
+            <React.Fragment></React.Fragment>
             // <FilterPanel
             //   setShowFilter={setShowFilter}
             //   showFilter={showFilter}

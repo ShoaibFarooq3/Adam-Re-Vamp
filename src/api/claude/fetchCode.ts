@@ -12,7 +12,7 @@ export const fetchCode = () => {
     async ({ prompt }) => {
       if (conversationHistory.length) {
         MESSAGES = [
-          ...conversationHistory, // Include conversation history in prompts
+          ...conversationHistory,
           {
             role: "user",
             content: `Take this object and Generate OpenSCAD 3D shape code for ${prompt.trim()}.`,

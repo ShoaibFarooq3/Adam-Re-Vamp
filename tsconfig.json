@@ -1,34 +1,31 @@
 {
   "compilerOptions": {
-    "jsx": "react",
     "target": "ES2021",
     "lib": [
       "dom",
       "dom.iterable",
       "ES2021",
-      "WebWorker"
-    ], 
+      "WebWorker",
+    ],
     "rootDir": "src",
+    // "outDir": "js",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": false, // Enable strict mode
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "outDir": "dist",  
+    // "noEmit": true,
+    "jsx": "react-jsx"
   },
   "include": [
     "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.spec.ts"
+    "src/**/*.tsx",
+    // "public"
   ]
 }

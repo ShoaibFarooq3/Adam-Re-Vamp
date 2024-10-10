@@ -4,7 +4,7 @@ const NewProject = ({ handleNewCreation }: any) => {
   return (
     <button
       onClick={handleNewCreation}
-      className="border border-[#949494] rounded-full min-w-[15vw] bg-black px-3 py-2 text-[#949494] flex items-center opacity-40 hover:opacity-100 hover:border-[#FF2D92] duration-150 cursor-default"
+      className="border border-[#949494] rounded-full w-full bg-black px-3 py-2 text-[#949494] flex items-center opacity-40 hover:opacity-100 hover:border-[#FF2D92] duration-150 cursor-default"
     >
       <span>
         <svg

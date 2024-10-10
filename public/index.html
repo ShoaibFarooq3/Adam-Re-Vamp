@@ -27,21 +27,18 @@
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/BrowserFS/2.0.0/browserfs.min.js" defer></script> -->
     <script src="./browserfs.min.js" defer></script>
-
     <script src="./index.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="adam.svg" />
 
-    <link rel="icon" href="../public/favicon.ico" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    />
+    <link rel="icon" href="../public/adom-icon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
 
     <meta
       name="description"
       content="Adam: edit .scad models with natural language and render them to STL from the browser "
     />
-    <link rel="apple-touch-icon" href="logo192.png" />
+    <link rel="apple-touch-icon" href="logo-adam.png" />
 
     <!-- https://developers.google.com/web/fundamentals/web-app-manifest/ -->
     <link rel="manifest" href="manifest.json" />
@@ -91,12 +88,19 @@
       .p-tabmenu-nav {
         padding-right: 30px;
       }
+      .slick-arrow {
+        display: none !important;
+      }
+      .slick-prev {
+        display: none !important;
+      }
+      .slick-next {
+        display: none !important;
+      }
     </style>
   </head>
   <body>
-    <noscript
-      >You need to enable JavaScript to run Adam locally.</noscript
-    >
+    <noscript>You need to enable JavaScript to run Adam locally.</noscript>
     <div id="root"></div>
   </body>
 </html>

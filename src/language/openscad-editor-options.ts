@@ -1,26 +1,26 @@
 // Portions of this file are Copyright 2021 Google LLC, and licensed under GPL2+. See COPYING.
 
-import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 
 export default {
-  lineNumbers: "on",
+  lineNumbers: 'on',
   // automaticLayout: true,
   scrollBeyondLastLine: false,
   fontSize: 12,
-  language: "openscad",
+  language: 'openscad',
   tabSize: 2,
-  wordWrap: "on",
-  wrappingStrategy: "advanced",
+  wordWrap: 'on',
+  wrappingStrategy: 'advanced',
   suggest: {
     // snippetsPreventQuickSuggestions: false,
     localityBonus: true,
     showStatusBar: true,
-    preview: true,
+    preview: true
   },
   codeLens: true,
   // language: 'javascript',
-  wordBasedSuggestions: false,
-} as any;
+  wordBasedSuggestions: false
+} as monaco.editor.IStandaloneEditorConstructionOptions
 
 // monaco.editor.IModelContentChangedEvent
 

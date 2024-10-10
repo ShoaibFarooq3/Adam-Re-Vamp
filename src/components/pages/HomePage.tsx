@@ -1,64 +1,192 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
+// api
+import { fetchCode } from "../../api/fetchCode";
+// context
+import { ModelContext } from "../contexts";
+// sections
+import CustomizePanel from "../sections/CustomizePanel";
+import ViewerPanel from "../sections/ViewerPanel1";
+import PromptPanel from "../sections/PromptPanel1";
+// components
+import { StartPage } from "../pages/StartPage";
+import Loader from "../atoms/Loader";
+import LogoSymbol from "../atoms/LogoSymbol";
+import SendIcon from "../atoms/SendIcon";
+// primereact
+import { ConfirmDialog } from "primereact/confirmdialog";
+import { ProgressBar } from "primereact/progressbar";
+// utils
+import { addPromptToHistory, cleanCode, getPromptHistory } from "../../utils";
+import Backdrop from "../atoms/Backdrop";
+import ToggleButton from "../atoms/ToggleButton";
 
-import Toast from "../atoms/Toast";
-import Layout from "../Layout/Layout";
-import { RootState } from "../../store"; // Adjust this import based on your file structure
-import PromptBar from "../atoms/PromptBar";
-import StartPage from "../sections/StartPage";
-import { clearUser } from "../../redux/slices/authSlice";
-import ViewPanel from "../sections/ViewPanel";
-import ResponsiveDrawer from "../atoms/ResponsiveDrawer";
-// import { ModelContext } from "../contexts/contexts";
-const HomePage = () => {
-  const dispatch = useDispatch();
+// ---------------------------------------------------------
 
-  // const model = useContext(ModelContext);
-  // if (!model) throw new Error("No model");
-  // const state = model.state;
-  // const lastPrompt = model?.state?.params?.lastPrompt || "";
+export function HomePage() {
+  // -------------------------------------
+  // model context
+  const model = useContext(ModelContext);
+  if (!model) throw new Error("No model");
+  const state = model.state;
 
-  const { isAuthenticated } = useSelector((state: RootState) => ({
-    isAuthenticated: state?.auth?.isAuthenticated,
-  }));
-  const [showFilter, setShowFilter] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false);
-  const [showStartPage, setShowStartPage] = useState(true);
-  const [showToast, setShowToast] = useState<boolean>(false); // display toast
-  const [isLoggedIn, setIsLoggedIn] = useState(!isAuthenticated);
-  const [toastMessage, setToastMessage] = useState({ message: "", type: "" }); // toast message
-  useEffect(() => {
+  // -------------------------------------
+  const [showStartPage, setShowStartPage] = useState(true); // start page dislay
+  const [showSidebar, setShowSidebar] = useState(false); // sidebar display
+  const [isLoading, setIsLoading] = useState(false); // loading status
+  const [prompt, setPrompt] = useState(""); // prompt
+  const [promptHistory, setPromptHistory] = useState<string[]>([]); // prompt history
+
+  // -------------------------------------
+
+  // handle api request
+  const handleRequest = async (requestPrompt: string) => {
+    if (!requestPrompt) return;
     setIsLoading(true);
-    setIsLoggedIn(!isAuthenticated);
-    setTimeout(() => {
+
+    try {
+      const response = await fetchCode(requestPrompt); // api call
+      const cleanResponse = cleanCode(response ?? "");
+
+      //console.log('---------\n', response, '\n---------')
+
+      if (cleanResponse !== "404") {
+        model.source = cleanResponse;
+        model.lastPrompt = requestPrompt;
+        handleUpdatePromptHistory(requestPrompt);
+        setPrompt("");
+      } else {
+        alert("Your prompt is invalid !");
+      }
+    } catch (error) {
+      console.log("ERROR: ", error);
+    } finally {
       setIsLoading(false);
-    }, 800);
-  }, [isAuthenticated]);
+    }
+  };
 
+  // -------------------------------------
+
+  // handle prompt change
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPrompt(e?.target?.value);
+  };
+
+  // handle add prompt to history
+  const handleUpdatePromptHistory = (p: string) => {
+    setPromptHistory((prev) => [p, ...prev]);
+    addPromptToHistory(p);
+  };
+
+  // -------------------------------------
+
+  // handle get prompt history
+  useEffect(() => {
+    const handlePromptHistory = () => {
+      const results = getPromptHistory();
+      setPromptHistory(results);
+    };
+
+    handlePromptHistory();
+  }, []);
+
+  // -------------------------------------
   return (
-    <div className="">
-      <div className="h-full flex flex-col">
-        {showStartPage ? (
-          <StartPage
-            showSidebar={showSidebar}
-            setShowSidebar={setShowSidebar}
-          />
-        ) : (
-          <React.Fragment>
-            <ViewPanel
-              setShowFilter={setShowFilter}
-              showFilter={showFilter}
-              showSidebar={showSidebar}
-              setShowSidebar={setShowSidebar}
+    <div className="h-screen overflow-hidden">
+      {/* PAGES DISPLAY */}
+      {showStartPage ? (
+        <StartPage
+          handleRequest={handleRequest}
+          setShowStartPage={setShowStartPage}
+        />
+      ) : (
+        <div className="h-full w-full flex-1 flex flex-col">
+          <div className="flex-1 flex relative">
+            {/* sidebar show button */}
+            <ToggleButton
+              open={showSidebar}
+              onClick={() => setShowSidebar(!showSidebar)}
             />
-          </React.Fragment>
-        )}
 
-        <PromptBar />
-      </div>
+            {/* backdrop */}
+            <Backdrop show={showSidebar} />
+
+            {/* left panel */}
+            <PromptPanel
+              className={`w-[20%] min-w-[250px] h-full max-md:absolute max-md:top-0 max-md:z-50 
+              ${showSidebar ? "max-md:left-0 " : "max-md:-left-full mr-5"} 
+              duration-300 ease-in-out`}
+              promptHistory={promptHistory}
+              handleRequest={handleRequest}
+            />
+
+            {/* right panel */}
+            <div className="flex-1 flex flex-col relative">
+              {/* 3d viewer */}
+              <ViewerPanel className="flex-1" />
+
+              <div className="p-5">
+                {/* customizer */}
+                <CustomizePanel />
+
+                {/* search bar */}
+                <form
+                  onSubmit={() => handleRequest(prompt)}
+                  className="relative w-11/12 md:w-4/5 lg:w-2/3 mx-auto rounded-full overflow-hidden"
+                >
+                  {/* logo symbol */}
+                  <div className="absolute top-0 left-0 pl-8 h-full flex items-center justify-center">
+                    <LogoSymbol />
+                  </div>
+
+                  {/* input */}
+                  <input
+                    placeholder="What can I make for you?"
+                    onChange={handleChange}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
+                        handleRequest(prompt);
+                      }
+                    }}
+                    className="w-full rounded-full flex border border-[#FFA5D0] text-base py-4 px-20 focus:outline-none outline-none focus:shadow-none bg-[#1D1D1D] text-white"
+                    value={prompt}
+                    readOnly={isLoading}
+                    disabled={isLoading}
+                  />
+
+                  {/* send button */}
+                  <button
+                    className="absolute top-0 right-0 h-full px-4 flex items-center justify-center disabled:opacity-50 duration-150"
+                    disabled={!prompt || isLoading}
+                    onClick={() => handleRequest(prompt)}
+                  >
+                    <SendIcon dark={false} />
+                  </button>
+                </form>
+              </div>
+              <div className="custom-progress-bar">
+                <ProgressBar
+                  mode="indeterminate"
+                  className="w-full"
+                  style={{
+                    visibility:
+                      state.rendering ||
+                      state.previewing ||
+                      state.checkingSyntax
+                        ? "visible"
+                        : "hidden",
+                    height: "6px",
+                  }}
+                />
+              </div>
+
+              {/* loader */}
+              <Loader isLoading={isLoading} />
+            </div>
+          </div>
+          <ConfirmDialog />
+        </div>
+      )}
     </div>
   );
-};
-
-export default HomePage;
+}

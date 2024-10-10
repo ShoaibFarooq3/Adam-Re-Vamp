@@ -2,7 +2,7 @@ import React from "react";
 import { SuggestionsProps } from "../../utils/interfaces";
 import { getColors } from "../../utils/utils";
 
-const Suggestions = ({ Number, item }: SuggestionsProps) => {
+const Suggestions = ({ Number, item, handleSuggestions }: SuggestionsProps) => {
   return (
     <div>
       <button
@@ -13,9 +13,9 @@ const Suggestions = ({ Number, item }: SuggestionsProps) => {
                         text-[#D7D7D7] text-sm 
                         font-dm-sans font-normal
                         leading-[14px] 
-                        hover:opacity-80 duration-150 ease-in-out cursor-default whitespace-nowrap`}
+                        hover:opacity-80 duration-150 ease-in-out cursor-default whitespace-nowrap hover:cursor-pointer`}
         style={{ backgroundColor: `${getColors(Number)}` }}
-        // onClick={() => handleRequest(s)}
+        onClick={() => handleSuggestions(item)}
       >
         {item}
       </button>
